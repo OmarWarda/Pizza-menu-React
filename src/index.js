@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom/client';
+import './index.css';
 
 const pizzaData = [
   {
@@ -56,32 +57,60 @@ function App () {
   );
 }
 
-function Pizza () {
-  return (
-    <div>
-      <h2>Pizza Margherita</h2>
-      <img src="pizzas/margherita.jpg" />
-      <p>Tomato and mozarella</p>
-    </div>
-  );
-}
-
 function Header () {
-  return <h1>Fast React Pizza Co.</h1>;
+  return (
+    <header className="header">
+      <h1>
+        Fast React Pizza Co.
+      </h1>
+    </header>
+  );
 }
 
 function Menu () {
   return (
-    <div>
-      <h2>Our Menu Ya BROOO TANYY inside omar-branch</h2>
-      <Pizza />
+    <main className="menu">
+      <h2>Our Menu</h2>
+      <Pizza
+        name="Pizza Margherita"
+        ingredient="Tomato and mozarella"
+        photoName="pizzas/margherita.jpg"
+        price={10}
+      />
+
+      <Pizza
+        name="Pizza Spinaci"
+        ingredient="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={12} // Use {} to pass data other than strings
+      />
+
+    </main>
+  );
+}
+
+function Pizza (props) {
+  // console.log (props);
+  // console.log (`test: ${props.photoName}`);
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+
+        <p>{props.ingredient}</p>
+        <span>price: {props.price + 3}</span>
+      </div>
+
     </div>
   );
 }
 
 function Footer () {
   return (
-    <footer>{new Date ().toLocaleTimeString}We are currently open!</footer>
+    <footer className="footer">
+      We are currently open!
+    </footer>
   );
   // return React.createElement ('footer', null, 'We are currently open!');
 }
