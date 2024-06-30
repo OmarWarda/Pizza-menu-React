@@ -73,7 +73,7 @@ function Header () {
 function Menu () {
   return (
     <div>
-      <h2>Our Menu</h2>
+      <h2>Our Menu Ya BROOO</h2>
       <Pizza />
     </div>
   );
