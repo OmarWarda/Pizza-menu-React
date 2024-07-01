@@ -73,12 +73,15 @@ function Menu () {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+
+      <p>
+        {' '}Authentic Italian cuisine. 6 creative dishes to choose from. All
+        from our stone oven, all organic, all delicious.
+      </p>
       {numOfPizzas > 0
         ? <ul className="pizzas">
             {/* here we pass the whole pizza object and we extract the data inside the pizza component */}
-            {pizzaData.map (pizza => (
-              <Pizza pizzaObject={pizza} key={pizza.name} />
-            )) // key is used so every object has a unique key which is the name here
+            {pizzaData.map (pizza => <Pizza pizzaObject={pizza} />) // key={pizza.name} --> key is used so every object has a unique key which is the name here
             }
           </ul>
         : <p>We're still working on our menu. Please come later :)</p>}
@@ -101,17 +104,18 @@ function Menu () {
   );
 }
 
-function Pizza (props) {
-  // console.log (props);
-  // console.log (`test: ${props.photoName}`);
+// Instead of passing general props(word) we pass pizzaObject
+// itself so we know which props is being passed to this component
+function Pizza({pizzaObject}) {
+  // if (pizzaObject.soldOut) return null;
   return (
     <li className="pizza">
-      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
+      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
       <div>
-        <h3>{props.pizzaObject.name}</h3>
+        <h3>{pizzaObject.name}</h3>
 
-        <p>{props.pizzaObject.ingredient}</p>
-        <span>price: {props.pizzaObject.price + 3}</span>
+        <p>{pizzaObject.ingredient}</p>
+        <span>price: {pizzaObject.price + 3}</span>
       </div>
 
     </li>
@@ -128,12 +132,7 @@ function Footer () {
     <footer className="footer">
 
       {isOpen
-        ? <div className="order">
-            <p>
-              We're open untill {closeHour}:00. Come visit us or order online.
-            </p>
-            <button className="btn">Order</button>
-          </div>
+        ? <Order closeHour={closeHour} openHour={openHour} />
         : <p>
             We're happy to welcome you between {openHour}:00 and {closeHour}:00
           </p>}
@@ -141,6 +140,17 @@ function Footer () {
     </footer>
   );
   // return React.createElement ('footer', null, 'We are currently open!');
+}
+
+function Order({closeHour, openHour}) {
+  return (
+    <div className="order">
+      <p>
+        We're open untill {closeHour}:00. Come visit us or order online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
 }
 const root = ReactDom.createRoot (document.getElementById ('root'));
 root.render (<React.StrictMode><App /></React.StrictMode>);
