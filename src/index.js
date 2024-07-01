@@ -76,7 +76,6 @@ function Menu () {
 
       {numOfPizzas > 0
         ? <>
-
             <p>
               {' '}
               Authentic Italian cuisine. 6 creative dishes to choose from. All

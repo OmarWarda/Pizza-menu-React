@@ -1,6 +1,38 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import './styles.css';
+const skills = [
+  {
+    skill: 'HTML+CSS',
+    level: 'advanced',
+    color: '#2662EA',
+  },
+  {
+    skill: 'JavaScript',
+    level: 'advanced',
+    color: '#EFD81D',
+  },
+  {
+    skill: 'Web Design',
+    level: 'advanced',
+    color: '#C3DCAF',
+  },
+  {
+    skill: 'Git and GitHub',
+    level: 'intermediate',
+    color: '#E84F33',
+  },
+  {
+    skill: 'React',
+    level: 'advanced',
+    color: '#60DAFB',
+  },
+  {
+    skill: 'Svelte',
+    level: 'beginner',
+    color: '#FF3B00',
+  },
+];
 
 function App () {
   return (
@@ -45,23 +77,52 @@ function Intro () {
 
 function SkillList () {
   return (
-    <div className="skill-list">
-      <Skill skill="Power" color="red" emoji="💪" />
-      <Skill skill="Skills" color="blue" emoji="💪" />
-      <Skill skill="Shooting" color="green" emoji="💪" />
-      <Skill skill="Mentaility" color="yellow" emoji="💪" />
+    <div>
+      {skills.map (skill => (
+        <Skill skill={skill.skill} color={skill.color} level={skill.level} />
+      ))}
     </div>
   );
+  // <div className="skill-list">
+  //   <Skill skill="Power" color="red" emoji="💪" />
+  //   <Skill skill="Skills" color="blue" emoji="💪" />
+  //   <Skill skill="Shooting" color="green" emoji="💪" />
+  //   <Skill skill="Mentaility" color="yellow" emoji="💪" />
+  // </div>
 }
 
-function Skill (props) {
-  return (
-    <div className="skill" style={{backgroundColor: props.color}}>
-      <span>{props.skill}</span>
-      <span>{props.emoji}</span>
-    </div>
-  );
-}
+// Another way of showing the skills
+// function Skill (props) {
+//   return (
+//     <div className="skill" style={{backgroundColor: props.color}}>
+//       <span>{props.skill}</span>
+//       <span>{props.emoji}</span>
+//     </div>
+//   );
+// }
+
+// function SkillList() {
+//   return (
+//     <div className="skill-list">
+//       {skills.map((skill) => (
+//         <Skill skillObj={skill} />
+//       ))}
+//     </div>
+//   );
+// }
+
+// function Skill({ skillObj }) {
+//   return (
+//     <div style={{ backgroundColor: skillObj.color }}>
+//       <span>{skillObj.skill}</span>
+//       <span>
+//         {skillObj.level === "beginner" && "👶"}
+//         {skillObj.level === "intermediate" && "👍"}
+//         {skillObj.level === "advanced" && "💪"}
+//       </span>
+//     </div>
+//   );
+// }
 
 const rootElement = document.getElementById ('root');
 const root = createRoot (rootElement);

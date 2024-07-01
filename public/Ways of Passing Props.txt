@@ -1,0 +1,59 @@
+Passing Props
+
+## First way by passing the data explicitly from the main component to the child
+ 
+<-- Parent --> 
+{skills.map (skill => ( <Skill skill={skill.skill} color={skill.color} level={skill.level} />))}
+
+<-- Child --> 
+
+# 1st way by using props object to get the passed data
+
+function Skill (props) {
+//   return (
+//     <div className="skill" style={{backgroundColor: props.color}}>
+//       <span>{props.skill}</span>
+//       <span>{props.emoji}</span>
+//     </div>
+//   );
+// }
+
+# 2nd way by destructing the props object 
+
+function Skill({ skill, color, emoji }) {
+  return (
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span>{skill}</span>
+      <span>{emoji}</span>
+    </div>
+  );
+}
+
+============================================================================================================================================================
+
+## Second way to pass props by passing the whole object from the parent then extract data in the child 
+
+
+<-- Parent --> 
+{pizzaData.map (pizza => <Pizza pizzaObject={pizza} />)
+
+
+<-- Child --> 
+
+# We use the object passed from the parent to extract the data inside this object for example here we get
+# the name of the pizza by using pizzaObj.name and same goes for the photoName and ingredients
+
+function Pizza({pizzaObject}) {
+  return (
+    <li className={`pizza ${pizzaObject.soldOut ? 'sold-out' : ''}`}>
+      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
+      <div>
+        <h3>{pizzaObject.name}</h3>
+
+        <p>{pizzaObject.ingredients}</p>
+        <span>price: {pizzaObject.soldOut ? 'SOLD OUT' : pizzaObject.price}</span>
+      </div>
+
+    </li>
+  );
+}
