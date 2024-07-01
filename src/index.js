@@ -68,10 +68,22 @@ function Header () {
 }
 
 function Menu () {
+  const pizzas = pizzaData;
+  const numOfPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
+      {numOfPizzas > 0
+        ? <ul className="pizzas">
+            {/* here we pass the whole pizza object and we extract the data inside the pizza component */}
+            {pizzaData.map (pizza => (
+              <Pizza pizzaObject={pizza} key={pizza.name} />
+            )) // key is used so every object has a unique key which is the name here
+            }
+          </ul>
+        : <p>We're still working on our menu. Please come later :)</p>}
+
+      {/* <Pizza
         name="Pizza Margherita"
         ingredient="Tomato and mozarella"
         photoName="pizzas/margherita.jpg"
@@ -83,7 +95,7 @@ function Menu () {
         ingredient="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
         price={12} // Use {} to pass data other than strings
-      />
+      /> */}
 
     </main>
   );
@@ -93,23 +105,39 @@ function Pizza (props) {
   // console.log (props);
   // console.log (`test: ${props.photoName}`);
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
       <div>
-        <h3>{props.name}</h3>
+        <h3>{props.pizzaObject.name}</h3>
 
-        <p>{props.ingredient}</p>
-        <span>price: {props.price + 3}</span>
+        <p>{props.pizzaObject.ingredient}</p>
+        <span>price: {props.pizzaObject.price + 3}</span>
       </div>
 
-    </div>
+    </li>
   );
 }
 
 function Footer () {
+  const hour = new Date ().getHours ();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+
   return (
     <footer className="footer">
-      We are currently open!
+
+      {isOpen
+        ? <div className="order">
+            <p>
+              We're open untill {closeHour}:00. Come visit us or order online.
+            </p>
+            <button className="btn">Order</button>
+          </div>
+        : <p>
+            We're happy to welcome you between {openHour}:00 and {closeHour}:00
+          </p>}
+
     </footer>
   );
   // return React.createElement ('footer', null, 'We are currently open!');
