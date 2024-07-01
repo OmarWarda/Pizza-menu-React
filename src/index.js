@@ -74,16 +74,20 @@ function Menu () {
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <p>
-        {' '}Authentic Italian cuisine. 6 creative dishes to choose from. All
-        from our stone oven, all organic, all delicious.
-      </p>
       {numOfPizzas > 0
-        ? <ul className="pizzas">
-            {/* here we pass the whole pizza object and we extract the data inside the pizza component */}
-            {pizzaData.map (pizza => <Pizza pizzaObject={pizza} />) // key={pizza.name} --> key is used so every object has a unique key which is the name here
-            }
-          </ul>
+        ? <>
+
+            <p>
+              {' '}
+              Authentic Italian cuisine. 6 creative dishes to choose from. All
+              from our stone oven, all organic, all delicious.
+            </p>
+            <ul className="pizzas">
+              {/* here we pass the whole pizza object and we extract the data inside the pizza component */}
+              {pizzaData.map (pizza => <Pizza pizzaObject={pizza} />) // key={pizza.name} --> key is used so every object has a unique key which is the name here
+              }
+            </ul>
+          </>
         : <p>We're still working on our menu. Please come later :)</p>}
 
       {/* <Pizza
@@ -109,13 +113,13 @@ function Menu () {
 function Pizza({pizzaObject}) {
   // if (pizzaObject.soldOut) return null;
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObject.soldOut ? 'sold-out' : ''}`}>
       <img src={pizzaObject.photoName} alt={pizzaObject.name} />
       <div>
         <h3>{pizzaObject.name}</h3>
 
-        <p>{pizzaObject.ingredient}</p>
-        <span>price: {pizzaObject.price + 3}</span>
+        <p>{pizzaObject.ingredients}</p>
+        <span>price: {pizzaObject.soldOut ? 'SOLD OUT' : pizzaObject.price}</span>
       </div>
 
     </li>
